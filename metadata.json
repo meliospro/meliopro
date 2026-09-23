@@ -1,0 +1,6 @@
+{
+  "name": "SamaTaxi",
+  "description": "Application de réservation de transport moto-taxi rapide à Kaolack Ville à 200 FCFA chaque 500m avec permis de conduire obligatoire et casque fourni.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

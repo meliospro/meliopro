@@ -1,0 +1,106 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Profil utilisateur passager ou chauffeur",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "phoneNumber": { "type": "string" },
+        "role": { "type": "string", "enum": ["client", "driver", "admin"] },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" },
+        "rating": { "type": "number" },
+        "totalTrips": { "type": "number" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "TripRecord": {
+      "title": "TripRecord",
+      "description": "Enregistrement d'une course de taxi",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "clientId": { "type": "string" },
+        "clientName": { "type": "string" },
+        "pickup": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "address": { "type": "string" },
+            "lat": { "type": "number" },
+            "lng": { "type": "number" }
+          },
+          "required": ["name", "lat", "lng"]
+        },
+        "destination": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "address": { "type": "string" },
+            "lat": { "type": "number" },
+            "lng": { "type": "number" }
+          },
+          "required": ["name", "lat", "lng"]
+        },
+        "distanceKm": { "type": "number" },
+        "durationMin": { "type": "number" },
+        "category": { "type": "string" },
+        "estimatedPrice": { "type": "number" },
+        "finalPrice": { "type": "number" },
+        "paymentMethod": { "type": "string", "enum": ["WAVE", "ORANGE_MONEY", "CASH", "CARD"] },
+        "status": {
+          "type": "string",
+          "enum": [
+            "REQUESTED",
+            "DRIVER_ASSIGNED",
+            "DRIVER_ARRIVING",
+            "DRIVER_ARRIVED",
+            "TRIP_STARTED",
+            "TRIP_COMPLETED",
+            "PAID",
+            "CANCELLED"
+          ]
+        },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "clientId", "pickup", "destination", "finalPrice", "status"]
+    },
+    "PaymentTransaction": {
+      "title": "PaymentTransaction",
+      "description": "Transaction de paiement (Wave, Orange Money ou Carte Bancaire)",
+      "type": "object",
+      "properties": {
+        "transactionId": { "type": "string" },
+        "tripId": { "type": "string" },
+        "amount": { "type": "number" },
+        "currency": { "type": "string" },
+        "method": { "type": "string", "enum": ["WAVE", "ORANGE_MONEY", "CARD"] },
+        "status": { "type": "string", "enum": ["pending", "completed", "failed"] },
+        "receiptNumber": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "cardLast4": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "completedAt": { "type": "string" }
+      },
+      "required": ["transactionId", "tripId", "amount", "currency", "method", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Profils des utilisateurs inscrits"
+    },
+    "/trips/{tripId}": {
+      "schema": "TripRecord",
+      "description": "Historique des courses de taxi créées par les utilisateurs"
+    },
+    "/transactions/{transactionId}": {
+      "schema": "PaymentTransaction",
+      "description": "Journal sécurisé des transactions de paiement"
+    }
+  }
+}
