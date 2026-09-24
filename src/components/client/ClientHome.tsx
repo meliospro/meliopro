@@ -53,6 +53,7 @@ export const ClientHome: React.FC = () => {
     drivers,
     notifications,
     currentUser,
+    addNotification,
   } = useTaxi();
 
   const [activeTab, setActiveTab] = useState<'home' | 'trips' | 'promos' | 'profile'>('home');
@@ -61,6 +62,7 @@ export const ClientHome: React.FC = () => {
   const [showPaymentPicker, setShowPaymentPicker] = useState(false);
   const [showDriverRegModal, setShowDriverRegModal] = useState(false);
   const [showAndroidModal, setShowAndroidModal] = useState(false);
+  const [zoneAlert, setZoneAlert] = useState<string | null>(null);
 
   // Calculate Distance & Price helper (Kaolack Ville)
   const calculateDistanceKm = (p1: LocationPoint, p2: LocationPoint) => {
@@ -89,9 +91,16 @@ export const ClientHome: React.FC = () => {
   const handleMapClick = (coords: { lat: number; lng: number; name: string }) => {
     if (tripStatus !== 'IDLE') return;
     if (!isWithinKaolackVille(coords.lat, coords.lng)) {
-      alert("⚠️ Limite de service : Les trajets SamaTaxi sont limités exclusivement au périmètre urbain de Kaolack Ville.");
+      setZoneAlert("⚠️ Zone non desservie : Les trajets SamaTaxi sont limités exclusivement à Kaolack Ville.");
+      setTimeout(() => setZoneAlert(null), 4000);
+      addNotification(
+        "Zone hors Kaolack Ville",
+        "Les trajets SamaTaxi sont strictement limités au périmètre urbain de Kaolack Ville.",
+        "safety"
+      );
       return;
     }
+    setZoneAlert(null);
     setDestination({
       id: `custom-dest-${Date.now()}`,
       name: coords.name,
@@ -190,7 +199,14 @@ export const ClientHome: React.FC = () => {
             </button>
           </div>
 
-          {/* Interactive Dakar Map (Vector) */}
+          {/* Zone Limit Toast */}
+          {zoneAlert && (
+            <div className="absolute top-16 left-3 right-3 z-30 bg-neutral-900/95 backdrop-blur-md text-amber-300 text-xs px-3.5 py-2 rounded-2xl shadow-xl border border-amber-500/40 flex items-center gap-2 animate-bounce pointer-events-none">
+              <span className="font-semibold text-center w-full">{zoneAlert}</span>
+            </div>
+          )}
+
+          {/* Interactive Kaolack Map (Vector) */}
           <div className="flex-1 w-full relative">
             <DakarMap
               pickup={clientLocation}

@@ -30,6 +30,7 @@ export const KaolackMap: React.FC<KaolackMapProps> = ({
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [warningMessage, setWarningMessage] = useState<string | null>(null);
 
   // Map coordinate conversion to SVG viewport for Kaolack Ville
   const minLat = KAOLACK_BOUNDS.minLat; // 14.110
@@ -75,7 +76,8 @@ export const KaolackMap: React.FC<KaolackMapProps> = ({
     const lat = maxLat - (clickY / 600) * (maxLat - minLat);
 
     if (!isWithinKaolackVille(lat, lng)) {
-      alert("⚠️ Zone hors limites : Les courses SamaTaxi sont strictement restreintes au périmètre urbain de Kaolack Ville.");
+      setWarningMessage("⚠️ Zone hors limites : Les courses sont restreintes au périmètre urbain de Kaolack Ville.");
+      setTimeout(() => setWarningMessage(null), 3500);
       return;
     }
 
@@ -121,6 +123,14 @@ export const KaolackMap: React.FC<KaolackMapProps> = ({
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
     >
+      {/* Out of bounds notification */}
+      {warningMessage && (
+        <div className="absolute top-3 left-1/2 -translate-x-1/2 z-40 bg-neutral-900/95 backdrop-blur-md text-amber-300 text-xs px-3.5 py-1.5 rounded-full shadow-xl border border-amber-500/40 flex items-center gap-1.5 animate-bounce pointer-events-none">
+          <AlertCircle size={14} className="text-amber-400 flex-shrink-0" />
+          <span className="font-semibold">{warningMessage}</span>
+        </div>
+      )}
+
       {/* SVG Vector Map of Kaolack Ville */}
       <svg
         className="w-full h-full transition-transform duration-75"

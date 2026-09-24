@@ -15,10 +15,10 @@ export const ClientWelcome: React.FC<ClientWelcomeProps> = ({ onStart, onLogin }
         <SamaLogo size="md" showSlogan />
       </div>
 
-      {/* Hero Illustration & Dakar Moto Theme */}
+      {/* Hero Illustration & Kaolack Moto Theme */}
       <div className="my-6 flex flex-col items-center text-center">
         <div className="relative w-full max-w-[280px] h-48 bg-gradient-to-b from-amber-50 to-amber-100/60 rounded-3xl p-4 flex flex-col items-center justify-center border border-amber-200/50 shadow-inner overflow-hidden">
-          {/* African Sun & Dakar Skyline Silhouette SVG */}
+          {/* African Sun & Kaolack Skyline Silhouette SVG */}
           <div className="absolute -top-6 -right-6 w-28 h-28 rounded-full bg-amber-300/40 blur-xl" />
           
           {/* Stylized Modern Moto-Taxi Visual */}

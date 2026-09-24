@@ -320,7 +320,7 @@ export const ClientAuthModal: React.FC<ClientAuthModalProps> = ({
             Activez votre localisation
           </h2>
           <p className="text-xs text-neutral-600 mt-2 max-w-xs leading-relaxed">
-            SamaTaxi utilise votre position GPS à Dakar pour localiser votre chauffeur,
+            SamaTaxi utilise votre position GPS à Kaolack pour localiser votre chauffeur,
             calculer l’itinéraire optimal et vous garantir une prise en charge rapide.
           </p>
 

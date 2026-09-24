@@ -488,7 +488,7 @@ export const INITIAL_TICKETS: SupportTicket[] = [
     userType: 'client',
     category: 'lost_item',
     subject: 'Portefeuille oublié dans le top-case de la moto',
-    description: 'J’ai fait le trajet Sacré-Cœur vers Sea Plaza et j’ai laissé un petit carnet dans le coffre arrière de la moto Bajaj.',
+    description: 'J’ai fait le trajet Médina Baye vers le Marché Central de Kaolack et j’ai laissé un petit carnet dans le coffre arrière de la moto Bajaj.',
     status: 'in_progress',
     createdAt: '21 Septembre 2026, 10:20',
     tripId: 'trip-901',

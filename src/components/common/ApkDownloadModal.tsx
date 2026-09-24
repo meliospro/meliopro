@@ -68,6 +68,45 @@ export const ApkDownloadModal: React.FC<ApkDownloadModalProps> = ({ isOpen, onCl
 
         {/* Options Container */}
         <div className="mt-5 space-y-4">
+          {/* Method 0 : Téléchargement Direct du Fichier .APK */}
+          <div className="p-4 rounded-2xl bg-gradient-to-br from-emerald-950 via-neutral-900 to-neutral-900 border-2 border-emerald-500/50 shadow-md">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-400 text-neutral-950 font-black text-xs">
+                  ★
+                </span>
+                <h3 className="text-sm font-bold text-white flex items-center gap-1.5">
+                  <Smartphone size={16} className="text-emerald-400" />
+                  <span>Fichier Android APK (.apk)</span>
+                </h3>
+              </div>
+              <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-md font-bold">
+                Direct
+              </span>
+            </div>
+            <p className="text-xs text-neutral-300 leading-relaxed mb-3">
+              Téléchargez directement le fichier d'installation <strong>SamaTaxi-Kaolack.apk</strong> sur votre smartphone Android.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <a
+                href="/api/download/apk"
+                download="SamaTaxi-Kaolack.apk"
+                className="py-2.5 px-3 bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-black rounded-xl text-xs flex items-center justify-center gap-2 transition shadow-md"
+              >
+                <Download size={15} />
+                <span>Télécharger l'APK (.apk)</span>
+              </a>
+              <a
+                href="/api/download/android-project"
+                download="SamaTaxi-Kaolack-Android-Studio.zip"
+                className="py-2.5 px-3 bg-neutral-800 hover:bg-neutral-700 text-emerald-300 font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 border border-emerald-500/30 transition"
+              >
+                <Download size={14} />
+                <span>Projet Android Studio (.zip)</span>
+              </a>
+            </div>
+          </div>
+
           {/* Method 1 : Installation directe Android (WebAPK) */}
           <div className="p-4 rounded-2xl bg-gradient-to-br from-amber-500/10 to-amber-500/5 border border-amber-500/30">
             <div className="flex items-center justify-between mb-2">

@@ -9,6 +9,7 @@ interface DriverEarningsProps {
 export const DriverEarnings: React.FC<DriverEarningsProps> = ({ onBack }) => {
   const { activeDriver, trips, pricing } = useTaxi();
   const [filter, setFilter] = useState<'day' | 'week' | 'month'>('day');
+  const [payoutSent, setPayoutSent] = useState(false);
 
   // Completed trips where driver was active
   const driverTrips = trips.filter((t) => t.status === 'PAID');
@@ -135,22 +136,33 @@ export const DriverEarnings: React.FC<DriverEarningsProps> = ({ onBack }) => {
       </div>
 
       {/* Wallet Payout Button */}
-      <div className="bg-amber-50 border border-amber-200 rounded-2xl p-3 flex items-center justify-between">
-        <div className="flex items-center gap-2.5">
-          <Wallet size={18} className="text-amber-600" />
-          <div>
-            <div className="text-xs font-bold text-neutral-900">Solde disponible Wave</div>
-            <div className="text-[10px] text-neutral-600 font-semibold">
-              {activeDriver.walletBalance.toLocaleString('fr-FR')} FCFA
+      <div className="bg-amber-50 border border-amber-200 rounded-2xl p-3 flex flex-col gap-2">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <Wallet size={18} className="text-amber-600" />
+            <div>
+              <div className="text-xs font-bold text-neutral-900">Solde disponible Wave</div>
+              <div className="text-[10px] text-neutral-600 font-semibold">
+                {activeDriver.walletBalance.toLocaleString('fr-FR')} FCFA
+              </div>
             </div>
           </div>
+          <button
+            onClick={() => {
+              setPayoutSent(true);
+              setTimeout(() => setPayoutSent(false), 4000);
+            }}
+            disabled={payoutSent || activeDriver.walletBalance <= 0}
+            className="px-3 py-1.5 bg-[#F5B800] hover:bg-amber-400 disabled:opacity-50 text-neutral-950 font-bold text-xs rounded-xl shadow-xs transition cursor-pointer"
+          >
+            {payoutSent ? 'Envoyé ✔️' : 'Retirer'}
+          </button>
         </div>
-        <button
-          onClick={() => alert(`Demande de virement Wave de ${activeDriver.walletBalance} FCFA envoyée vers +221 77 645 28 19`)}
-          className="px-3 py-1.5 bg-[#F5B800] hover:bg-amber-400 text-neutral-950 font-bold text-xs rounded-xl shadow-xs"
-        >
-          Retirer
-        </button>
+        {payoutSent && (
+          <div className="text-[11px] font-semibold text-emerald-700 bg-emerald-100/70 p-2 rounded-xl flex items-center gap-1.5">
+            <span>✅ Virement Wave de {activeDriver.walletBalance.toLocaleString('fr-FR')} FCFA demandé vers {activeDriver.phone}.</span>
+          </div>
+        )}
       </div>
     </div>
   );

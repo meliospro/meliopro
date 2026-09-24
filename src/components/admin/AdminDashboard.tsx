@@ -151,7 +151,7 @@ export const AdminDashboard: React.FC = () => {
                   Tableau de bord Général
                 </h2>
                 <p className="text-xs text-neutral-400 mt-0.5">
-                  Surveillance en direct des opérations SamaTaxi à Dakar et banlieue.
+                  Surveillance en direct des opérations SamaTaxi à Kaolack Ville.
                 </p>
               </div>
 
@@ -222,7 +222,7 @@ export const AdminDashboard: React.FC = () => {
               <div className="flex items-center justify-between pb-3 border-b border-neutral-800 mb-3">
                 <div className="flex items-center gap-2">
                   <MapPin size={16} className="text-amber-400" />
-                  <span className="text-xs font-bold text-white">Carte en direct Dakar & Position des Véhicules</span>
+                  <span className="text-xs font-bold text-white">Carte en direct Kaolack & Position des Véhicules</span>
                 </div>
                 <button
                   onClick={() => setActiveTab('map')}
@@ -433,10 +433,10 @@ export const AdminDashboard: React.FC = () => {
             <div className="bg-neutral-950 rounded-3xl border border-neutral-800 p-4">
               <div className="divide-y divide-neutral-900">
                 {[
-                  { name: 'Ousmane Fall', phone: '+221 77 500 12 34', rating: 4.9, rides: 24, status: 'Actif', city: 'Sacré-Cœur, Dakar' },
-                  { name: 'Aminata Touré', phone: '+221 78 220 99 88', rating: 5.0, rides: 18, status: 'Actif', city: 'Plateau, Dakar' },
-                  { name: 'Jean Mendy', phone: '+221 76 111 22 33', rating: 4.8, rides: 42, status: 'Actif', city: 'Almadies, Dakar' },
-                  { name: 'Awa Diagne', phone: '+221 70 889 44 55', rating: 4.7, rides: 9, status: 'Actif', city: 'Yoff, Dakar' },
+                  { name: 'Ousmane Fall', phone: '+221 77 500 12 34', rating: 4.9, rides: 24, status: 'Actif', city: 'Médina Baye, Kaolack' },
+                  { name: 'Aminata Touré', phone: '+221 78 220 99 88', rating: 5.0, rides: 18, status: 'Actif', city: 'Kasnack, Kaolack' },
+                  { name: 'Jean Mendy', phone: '+221 76 111 22 33', rating: 4.8, rides: 42, status: 'Actif', city: 'Marché Central, Kaolack' },
+                  { name: 'Awa Diagne', phone: '+221 70 889 44 55', rating: 4.7, rides: 9, status: 'Actif', city: 'Ndorong, Kaolack' },
                 ].map((c, idx) => (
                   <div key={idx} className="py-3 flex items-center justify-between">
                     <div className="flex items-center gap-3">

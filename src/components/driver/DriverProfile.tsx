@@ -77,7 +77,7 @@ export const DriverProfile: React.FC<DriverProfileProps> = ({ onBack }) => {
             <span>Moto enregistrée</span>
           </span>
           <span className="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-bold rounded-md">
-            Conforme Moto-Taxi Dakar
+            Conforme Moto-Taxi Kaolack
           </span>
         </div>
 
@@ -157,7 +157,7 @@ export const DriverProfile: React.FC<DriverProfileProps> = ({ onBack }) => {
       <div className="bg-neutral-900 text-white rounded-3xl p-4 shadow-sm">
         <div className="flex items-center gap-2 mb-2 text-xs font-bold text-amber-400">
           <Award size={16} />
-          <span>Statut Motard Vérifié SamaTaxi Dakar</span>
+          <span>Statut Motard Vérifié SamaTaxi Kaolack</span>
         </div>
         <p className="text-[11px] text-neutral-300">
           Conducteur officiel enregistré avec permis valide depuis {activeDriver.joinedDate}. Tarif fixe garanti : 200 FCFA / 500m.
