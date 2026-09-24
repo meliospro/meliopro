@@ -15,6 +15,7 @@ import { ClientProfile } from './ClientProfile';
 import { HistoriqueTrajets } from './HistoriqueTrajets';
 import { EstimateurTarif } from './EstimateurTarif';
 import { GroundingAssistantModal } from './GroundingAssistantModal';
+import { AndroidAppModal } from '../common/AndroidAppModal';
 import {
   MapPin,
   Search,
@@ -32,6 +33,7 @@ import {
   Sparkles,
   ArrowRight,
   Bike,
+  Smartphone,
 } from 'lucide-react';
 
 export const ClientHome: React.FC = () => {
@@ -58,6 +60,7 @@ export const ClientHome: React.FC = () => {
   const [showGroundingModal, setShowGroundingModal] = useState(false);
   const [showPaymentPicker, setShowPaymentPicker] = useState(false);
   const [showDriverRegModal, setShowDriverRegModal] = useState(false);
+  const [showAndroidModal, setShowAndroidModal] = useState(false);
 
   // Calculate Distance & Price helper (Kaolack Ville)
   const calculateDistanceKm = (p1: LocationPoint, p2: LocationPoint) => {
@@ -161,6 +164,15 @@ export const ClientHome: React.FC = () => {
               >
                 <Bike size={12} />
                 <span>Devenir Chauffeur</span>
+              </button>
+
+              <button
+                onClick={() => setShowAndroidModal(true)}
+                className="bg-emerald-500 hover:bg-emerald-600 text-white px-2.5 py-1.5 rounded-full text-[10px] font-black shadow-md flex items-center gap-1 transition active:scale-95 cursor-pointer"
+                title="Fichier Android (.APK) & Installation Smartphone"
+              >
+                <Smartphone size={12} />
+                <span>Android (.APK)</span>
               </button>
 
               <PWAInstallButton />
@@ -585,6 +597,12 @@ export const ClientHome: React.FC = () => {
       <DriverRegistrationModal
         isOpen={showDriverRegModal}
         onClose={() => setShowDriverRegModal(false)}
+      />
+
+      {/* Android Application Modal (APK & Native Files) */}
+      <AndroidAppModal
+        isOpen={showAndroidModal}
+        onClose={() => setShowAndroidModal(false)}
       />
     </div>
   );

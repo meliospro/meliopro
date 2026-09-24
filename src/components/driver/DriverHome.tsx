@@ -3,6 +3,7 @@ import { useTaxi } from '../../context/TaxiContext';
 import { DakarMap } from '../common/DakarMap';
 import { DriverEarnings } from './DriverEarnings';
 import { DriverProfile } from './DriverProfile';
+import { AndroidAppModal } from '../common/AndroidAppModal';
 import {
   Power,
   Navigation,
@@ -21,6 +22,7 @@ import {
   Shield,
   ShieldCheck,
   Layers,
+  Smartphone,
 } from 'lucide-react';
 
 export const DriverHome: React.FC = () => {
@@ -42,6 +44,7 @@ export const DriverHome: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'home' | 'trips' | 'earnings' | 'profile'>('home');
   const [countdown, setCountdown] = useState(15);
   const [slideConfirm, setSlideConfirm] = useState(0);
+  const [showAndroidModal, setShowAndroidModal] = useState(false);
 
   // Incoming ride countdown timer (15 seconds, Prompt #32)
   useEffect(() => {
@@ -130,18 +133,29 @@ export const DriverHome: React.FC = () => {
                 </div>
               </div>
 
-              {/* Online/Offline Toggle Button */}
-              <button
-                onClick={toggleDriverOnline}
-                className={`px-3.5 py-1.5 rounded-xl font-bold text-xs flex items-center gap-1.5 transition active:scale-95 shadow-sm ${
-                  activeDriver.isOnline
-                    ? 'bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500/30'
-                    : 'bg-[#F5B800] text-neutral-950 hover:bg-amber-400'
-                }`}
-              >
-                <Power size={13} />
-                <span>{activeDriver.isOnline ? 'Se déconnecter' : 'PASSER EN LIGNE'}</span>
-              </button>
+              {/* Online/Offline Toggle Button & Android APK */}
+              <div className="flex items-center gap-1.5">
+                <button
+                  onClick={() => setShowAndroidModal(true)}
+                  className="px-2.5 py-1.5 rounded-xl bg-neutral-800 text-emerald-400 hover:text-white transition flex items-center gap-1 text-[11px] font-bold border border-neutral-700 active:scale-95"
+                  title="Fichier Android (.APK) pour téléphone motard"
+                >
+                  <Smartphone size={13} />
+                  <span>APK</span>
+                </button>
+
+                <button
+                  onClick={toggleDriverOnline}
+                  className={`px-3.5 py-1.5 rounded-xl font-bold text-xs flex items-center gap-1.5 transition active:scale-95 shadow-sm ${
+                    activeDriver.isOnline
+                      ? 'bg-red-500/20 text-red-400 border border-red-500/30 hover:bg-red-500/30'
+                      : 'bg-[#F5B800] text-neutral-950 hover:bg-amber-400'
+                  }`}
+                >
+                  <Power size={13} />
+                  <span>{activeDriver.isOnline ? 'Se déconnecter' : 'PASSER EN LIGNE'}</span>
+                </button>
+              </div>
             </div>
 
             {/* Daily KPI Badges (Prompt #31) */}
@@ -378,6 +392,12 @@ export const DriverHome: React.FC = () => {
           <span className="text-[10px]">Profil</span>
         </button>
       </div>
+
+      {/* Android Application Modal */}
+      <AndroidAppModal
+        isOpen={showAndroidModal}
+        onClose={() => setShowAndroidModal(false)}
+      />
     </div>
   );
 };

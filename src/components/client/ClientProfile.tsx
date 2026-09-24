@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTaxi } from '../../context/TaxiContext';
 import { DriverRegistrationModal } from '../driver/DriverRegistrationModal';
 import { PWAInstallButton } from '../common/PWAInstallButton';
+import { AndroidAppModal } from '../common/AndroidAppModal';
 import {
   User,
   Phone,
@@ -25,6 +26,7 @@ import {
   Bike,
   ShieldAlert,
   Smartphone,
+  Download,
 } from 'lucide-react';
 
 interface ClientProfileProps {
@@ -58,6 +60,7 @@ export const ClientProfile: React.FC<ClientProfileProps> = ({
   const [ticketCreatedSuccess, setTicketCreatedSuccess] = useState(false);
   const [authLoading, setAuthLoading] = useState(false);
   const [showPaymentMethodsModal, setShowPaymentMethodsModal] = useState(false);
+  const [showAndroidModal, setShowAndroidModal] = useState(false);
 
   const handleGoogleLogin = async () => {
     setAuthLoading(true);
@@ -331,6 +334,47 @@ export const ClientProfile: React.FC<ClientProfileProps> = ({
           <Bike size={15} />
           <span>S’inscrire comme Chauffeur Moto (Permis exigé)</span>
         </button>
+      </div>
+
+      {/* Android Native APK & Project Files Card */}
+      <div className="bg-gradient-to-r from-emerald-950 via-neutral-900 to-neutral-900 p-4 rounded-3xl border border-emerald-500/40 shadow-sm mb-4 text-white">
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl bg-emerald-500 text-neutral-950 flex items-center justify-center font-black shadow-md flex-shrink-0">
+              <Smartphone size={22} />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-extrabold text-white">
+                  Application Android (.APK)
+                </span>
+                <span className="px-2 py-0.5 rounded-full text-[9px] font-black bg-emerald-400 text-neutral-950">
+                  KL v1.0
+                </span>
+              </div>
+              <p className="text-[11px] text-neutral-300 mt-0.5 leading-snug">
+                Fichier APK téléchargeable + projet Android Studio avec <code>AndroidManifest.xml</code>.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-2 mt-3.5">
+          <button
+            onClick={() => setShowAndroidModal(true)}
+            className="py-2.5 px-3 bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-black rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-sm transition active:scale-98 cursor-pointer"
+          >
+            <Download size={14} />
+            <span>Télécharger APK</span>
+          </button>
+          <button
+            onClick={() => setShowAndroidModal(true)}
+            className="py-2.5 px-3 bg-neutral-800 hover:bg-neutral-700 text-emerald-300 font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 border border-emerald-500/30 transition active:scale-98 cursor-pointer"
+          >
+            <Smartphone size={14} />
+            <span>Fichiers Android</span>
+          </button>
+        </div>
       </div>
 
       {/* PWA & Google Play Store Info Card */}
@@ -682,6 +726,12 @@ export const ClientProfile: React.FC<ClientProfileProps> = ({
           setShowDriverRegModal(false);
           setRole('driver');
         }}
+      />
+
+      {/* Modal Android APK & Source Files */}
+      <AndroidAppModal
+        isOpen={showAndroidModal}
+        onClose={() => setShowAndroidModal(false)}
       />
     </div>
   );

@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
+import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { createServer as createViteServer } from 'vite';
@@ -476,6 +477,51 @@ app.get('/api/payment/transaction/:txId', (req, res) => {
     return res.status(404).json({ error: 'Transaction non trouvée' });
   }
   res.json(tx);
+});
+
+// ==========================================
+// 4. ANDROID DOWNLOAD & ARTIFACT APIS
+// ==========================================
+
+/**
+ * Direct APK Download for Android Devices
+ */
+app.get('/api/download/apk', (req, res) => {
+  const apkPath = path.join(process.cwd(), 'public', 'samataxi-kaolack.apk');
+  if (fs.existsSync(apkPath)) {
+    res.setHeader('Content-Type', 'application/vnd.android.package-archive');
+    res.setHeader('Content-Disposition', 'attachment; filename="SamaTaxi-Kaolack.apk"');
+    res.sendFile(apkPath);
+  } else {
+    res.status(404).json({ error: 'Fichier APK en cours de génération' });
+  }
+});
+
+/**
+ * Full Android Studio Project Source (.ZIP)
+ */
+app.get('/api/download/android-project', (req, res) => {
+  const zipPath = path.join(process.cwd(), 'public', 'samataxi-android-project.zip');
+  if (fs.existsSync(zipPath)) {
+    res.setHeader('Content-Type', 'application/zip');
+    res.setHeader('Content-Disposition', 'attachment; filename="SamaTaxi-Kaolack-Android-Studio.zip"');
+    res.sendFile(zipPath);
+  } else {
+    res.status(404).json({ error: 'Projet Android en cours de préparation' });
+  }
+});
+
+/**
+ * Direct AndroidManifest.xml inspection
+ */
+app.get('/api/download/android-manifest', (req, res) => {
+  const manifestPath = path.join(process.cwd(), 'android', 'app', 'src', 'main', 'AndroidManifest.xml');
+  if (fs.existsSync(manifestPath)) {
+    res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+    res.sendFile(manifestPath);
+  } else {
+    res.status(404).send('AndroidManifest.xml non trouvé');
+  }
 });
 
 // Vite middleware / static files

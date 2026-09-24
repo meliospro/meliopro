@@ -14,9 +14,9 @@ export default defineConfig(() => {
         includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'icon.svg'],
         manifest: {
           id: '/',
-          name: 'SamaTaxi — Moto-Taxi Sénégal',
-          short_name: 'SamaTaxi',
-          description: 'Application de moto-taxi rapide à Dakar (200 FCFA / 500 mètres). Casque fourni, motards agréés avec permis de conduire.',
+          name: 'SamaTaxi — Moto-Taxi Kaolack',
+          short_name: 'SamaTaxi KL',
+          description: 'Application de moto-taxi rapide à Kaolack Ville (200 FCFA / 500 mètres). Casque fourni, motards agréés avec permis de conduire.',
           theme_color: '#F5B800',
           background_color: '#171717',
           display: 'standalone',
